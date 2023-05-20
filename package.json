@@ -1,0 +1,46 @@
+{
+  "name": "test-runner-utils",
+  "version": "1.0.0",
+  "description": "library to facilitate the integration of the NodeJS test runner into a Jest-based project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnold095/node-test-runner-utils.git"
+  },
+  "engines": {
+    "node": ">20.0.0",
+    "npm": "please-use-pnpm"
+  },
+  "keywords": [
+    "node:test",
+    "test runner",
+    "it each",
+    "it-each",
+    "it.each",
+    "jest",
+    "test"
+  ],
+  "author": "arnold095",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arnold095/node-test-runner-utils/issues"
+  },
+  "homepage": "https://github.com/arnold095/node-test-runner-utils#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.1",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-editorconfig": "^4.0.2",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  }
+}

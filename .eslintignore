@@ -1,0 +1,6 @@
+**/node_modules/**
+**/docker_data/**
+**/.eslintrc.js
+**/commitlint.config.js
+**/dist/**
+**/build/**
