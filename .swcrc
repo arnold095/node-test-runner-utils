@@ -1,0 +1,21 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "dynamicImport": true
+    },
+    "transform": {
+      "legacyDecorator": true
+    }
+  },
+  "env": {
+    "targets": {
+      "node": "20"
+    }
+  },
+  "sourceMaps": "inline",
+  "module": {
+    "type": "commonjs"
+  }
+}

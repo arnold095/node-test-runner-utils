@@ -25,6 +25,7 @@ module.exports = {
         tsconfigRootDir: __dirname,
         project: [
             './tsconfig.json',
+            './tests/tsconfig.json',
         ],
     },
     rules: {
@@ -48,15 +49,11 @@ module.exports = {
         '@typescript-eslint/no-var-requires': ['error'],
         '@typescript-eslint/require-await': ['error'],
         '@typescript-eslint/restrict-plus-operands': ['error'],
-        '@typescript-eslint/restrict-template-expressions': ['error'],
+        '@typescript-eslint/restrict-template-expressions': ['off'],
         '@typescript-eslint/unbound-method': ['error'],
         '@typescript-eslint/no-for-in-array': ['error'],
         '@typescript-eslint/prefer-regexp-exec': ['error'],
         '@typescript-eslint/prefer-readonly': ['error'],
-        '@typescript-eslint/explicit-function-return-type': [
-            'error',
-            { allowExpressions: true },
-        ],
         'class-methods-use-this': ['off'],
         'consistent-return': ['error'],
         'dot-notation': ['error'],
