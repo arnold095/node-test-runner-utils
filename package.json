@@ -4,7 +4,7 @@
   "description": "library to facilitate the integration of the NodeJS test runner into a Jest-based project",
   "main": "index.js",
   "scripts": {
-    "test": "node --require @swc/register ./tests/TestConfig.js"
+    "test": "node --require @swc/register tests/node-test-runner.config.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "it each",
     "it-each",
     "it.each",
+    "describe each",
     "jest",
     "test"
   ],
