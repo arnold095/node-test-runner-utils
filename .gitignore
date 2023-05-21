@@ -28,3 +28,6 @@ node_modules/
 .idea
 
 .DS_Store
+
+# build output
+dist/
