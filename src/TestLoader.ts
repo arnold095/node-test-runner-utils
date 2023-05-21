@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { run } from 'node:test';
-// @ts-ignore
-import { spec as Spec } from 'node:test/reporters';
+import { dot as Dot, spec as Spec, tap as Tap } from 'node:test/reporters';
 
 import { sync } from 'fast-glob';
 import process from 'process';
@@ -10,14 +8,31 @@ type TestLoaderOptions = {
   testPath: string;
   concurrency?: boolean;
   timeout?: number;
+  reporter?: 'dot' | 'spec' | 'tap';
 };
 
 const verifyTestPath = (testPath: string): void => {
   if (!testPath) throw new Error('testPath is required');
 };
 
+const defaultReporters = {
+  dot: Dot,
+  spec: new Spec(),
+  tap: Tap,
+};
+
+const getReporter = (reporterName: TestLoaderOptions['reporter']): unknown => {
+  const name = reporterName || 'spec';
+
+  const reporter = defaultReporters[name];
+
+  if (!reporter) throw new Error(`Reporter ${name} not found`);
+
+  return reporter;
+};
+
 export const runTests = (options: TestLoaderOptions): void => {
-  const { testPath, ...anotherOptions } = options;
+  const { testPath, reporter, ...anotherOptions } = options;
 
   verifyTestPath(testPath);
 
@@ -27,7 +42,8 @@ export const runTests = (options: TestLoaderOptions): void => {
     ...anotherOptions,
     files,
   })
+    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
     // @ts-ignore
-    .compose(new Spec())
+    .compose(getReporter(reporter))
     .pipe(process.stdout);
 };
