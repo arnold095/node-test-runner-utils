@@ -22,7 +22,7 @@ Once the library is installed, you can import the necessary utilities into your 
 First, create a configuration file for the native test runner of Node.js. For example, you can create a file named `node-test-runner.config.js` in the root directory of your project with the following content:
 
 ```javascript
-import { runTests } from "../src";
+import { runTests } from 'node-test-runner-utils';
 
 runTests({ // Set the configuration options. Source: https://nodejs.org/api/test.html#runoptions
     testPath: 'tests/**/*.test.ts', // Path to the test files
