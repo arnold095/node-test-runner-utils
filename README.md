@@ -1,4 +1,4 @@
-# node-test-utils
+# node-test-runner-utils
 
 The `node-test-runner-utils` library has been developed with the purpose of facilitating the migration of projects based on Jest to the native test runner `node:test` of Node.js.
 
