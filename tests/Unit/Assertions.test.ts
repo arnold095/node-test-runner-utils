@@ -42,6 +42,14 @@ describe('Should make the following assertions', () => {
     expect(null).not.toBeDefined();
   });
 
+  it('When is undefined', () => {
+    expect(undefined).toBeUndefined();
+  });
+
+  it('When is not undefined', () => {
+    expect(1).not.toBeUndefined();
+  });
+
   it('When has a specific length', () => {
     expect([1, 2, 3]).toHaveLength(3);
   });

@@ -9,6 +9,9 @@ export const expect = (value: any) => ({
   toBeDefined: () => {
     assert.ok(value);
   },
+  toBeUndefined: () => {
+    assert.ok(!value);
+  },
   toBeTruthy: () => {
     assert.strictEqual(true, value);
   },
@@ -33,6 +36,9 @@ export const expect = (value: any) => ({
     },
     toBeDefined: () => {
       assert.ok(!value);
+    },
+    toBeUndefined: () => {
+      assert.ok(value);
     },
     toEqual: (expected: unknown) => {
       assert.notDeepStrictEqual(value, expected);
