@@ -2,9 +2,11 @@
   "name": "test-runner-utils",
   "version": "1.0.0",
   "description": "library to facilitate the integration of the NodeJS test runner into a Jest-based project",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
-    "test": "node --require @swc/register tests/node-test-runner.config.js"
+    "test": "node --require @swc/register tests/node-test-runner.config.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -15,14 +17,21 @@
     "npm": "please-use-pnpm"
   },
   "keywords": [
-    "node:test",
+    "node",
+    "test",
+    "testing",
     "test runner",
+    "jest",
+    "migration",
+    "utility",
+    "tool",
+    "node:test",
     "it each",
     "it-each",
     "it.each",
     "describe each",
-    "jest",
-    "test"
+    "describe-each",
+    "describe.each"
   ],
   "author": "arnold095",
   "license": "ISC",
