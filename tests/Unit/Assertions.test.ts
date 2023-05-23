@@ -33,6 +33,15 @@ describe('Should make the following assertions', () => {
     expect({ a: 1 }).not.toHaveProperty('b');
   });
 
+  it('When is defined', () => {
+    expect(1).toBeDefined();
+  });
+
+  it('When is not defined', () => {
+    expect(undefined).not.toBeDefined();
+    expect(null).not.toBeDefined();
+  });
+
   describe('When the assertion is rejected', () => {
     it('Not expect a specific error', async () => {
       await expect(Promise.reject('Error')).rejects.toThrow();
