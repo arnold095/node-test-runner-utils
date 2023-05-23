@@ -50,6 +50,14 @@ describe('Should make the following assertions', () => {
     expect([1, 2, 3]).not.toHaveLength(2);
   });
 
+  it('When contains a specific value', () => {
+    expect([1, 2, 3]).toContain(2);
+  });
+
+  it('When not contains a specific value', () => {
+    expect([1, 2, 3]).not.toContain(4);
+  });
+
   describe('When the assertion is rejected', () => {
     it('Not expect a specific error', async () => {
       await expect(Promise.reject('Error')).rejects.toThrow();
