@@ -1,6 +1,6 @@
 {
   "name": "node-test-runner-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "library to facilitate the integration of the NodeJS test runner into a Jest-based project",
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
