@@ -21,6 +21,9 @@ export const expect = (value: any) => ({
   toHaveProperty: (property: string) => {
     assert.ok(value[property]);
   },
+  toHaveLength: (length: number) => {
+    assert.strictEqual(value.length, length);
+  },
   not: {
     toBe: (expected: unknown) => {
       assert.notStrictEqual(value, expected);
@@ -33,6 +36,9 @@ export const expect = (value: any) => ({
     },
     toHaveProperty: (property: string) => {
       assert.ok(!value[property]);
+    },
+    toHaveLength: (length: number) => {
+      assert.notStrictEqual(value.length, length);
     },
   },
   rejects: {

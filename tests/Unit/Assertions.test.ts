@@ -42,6 +42,14 @@ describe('Should make the following assertions', () => {
     expect(null).not.toBeDefined();
   });
 
+  it('When has a specific length', () => {
+    expect([1, 2, 3]).toHaveLength(3);
+  });
+
+  it('When has not a specific length', () => {
+    expect([1, 2, 3]).not.toHaveLength(2);
+  });
+
   describe('When the assertion is rejected', () => {
     it('Not expect a specific error', async () => {
       await expect(Promise.reject('Error')).rejects.toThrow();
