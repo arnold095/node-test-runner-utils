@@ -1,5 +1,6 @@
 import * as assert from 'assert';
 
+import { toContainEqual } from './Assert/ToContainEqual';
 import { NewableClass } from './Utils/NewableClass';
 
 export const expect = (value: any) => ({
@@ -30,6 +31,12 @@ export const expect = (value: any) => ({
   toContain: (expected: unknown) => {
     assert.ok(value.includes(expected));
   },
+  toContainEqual: (expected: unknown) => {
+    toContainEqual(value as unknown[], expected);
+  },
+  toStrictEqual: (expected: unknown) => {
+    assert.deepStrictEqual(value, expected);
+  },
   not: {
     toBe: (expected: unknown) => {
       assert.notStrictEqual(value, expected);
@@ -51,6 +58,12 @@ export const expect = (value: any) => ({
     },
     toContain: (expected: unknown) => {
       assert.ok(!value.includes(expected));
+    },
+    toStrictEqual: (expected: unknown) => {
+      assert.notDeepStrictEqual(value, expected);
+    },
+    toContainEqual: (expected: unknown) => {
+      toContainEqual(value as unknown[], expected, true);
     },
   },
   rejects: {

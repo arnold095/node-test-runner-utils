@@ -66,6 +66,19 @@ describe('Should make the following assertions', () => {
     expect([1, 2, 3]).not.toContain(4);
   });
 
+  it('When is strictly equal', () => {
+    const expectedDate = new Date();
+    const actualDate = new Date(expectedDate.getTime());
+    expect(expectedDate).toStrictEqual(actualDate);
+  });
+
+  it('When is not strictly equal', () => {
+    const expectedDate = new Date();
+    const actualDate = new Date(expectedDate.getTime() + 1);
+
+    expect(expectedDate).not.toStrictEqual(actualDate);
+  });
+
   describe('When the assertion is rejected', () => {
     it('Not expect a specific error', async () => {
       await expect(Promise.reject('Error')).rejects.toThrow();

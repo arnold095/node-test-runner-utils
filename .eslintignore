@@ -2,5 +2,6 @@
 **/docker_data/**
 **/.eslintrc.js
 **/commitlint.config.js
+**/node-test-runner.config.js
 **/dist/**
 **/build/**
