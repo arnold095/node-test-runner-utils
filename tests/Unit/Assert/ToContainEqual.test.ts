@@ -39,11 +39,15 @@ describe('Should make the following toContainEqual assertions', () => {
   });
 
   describe.skip('When is an array of instances', () => {
+    class Name {
+      public constructor(public readonly name: string) {}
+    }
+
     class A {
-      public constructor(public readonly id: number) {}
+      public constructor(public readonly id: number, public readonly names?: Name[]) {}
     }
     class B {
-      public constructor(public readonly id: number) {}
+      public constructor(public readonly id: number, public readonly names?: Name[]) {}
     }
 
     it('When instance is in the array with same values', () => {
@@ -60,6 +64,18 @@ describe('Should make the following toContainEqual assertions', () => {
 
     it('When instance is not in the array', () => {
       expect([new A(1), new A(2), new A(3)]).not.toContainEqual(new B(2));
+    });
+
+    it('When instance is in the array with same values and nested objects', () => {
+      expect([new A(1, [new Name('a')]), new A(2), new A(3)]).toContainEqual(
+        new A(1, [new Name('a')]),
+      );
+    });
+
+    it('When instance is not in the array with same values and nested objects', () => {
+      expect([new A(1, [new Name('a')]), new A(2), new A(3)]).not.toContainEqual(
+        new A(1, [new Name('b')]),
+      );
     });
   });
 });

@@ -69,8 +69,13 @@ const compareInstances = (
   }
 
   for (const key of keys1) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    if (isClass(instance1[key]) && isClass(instance2[key])) {
+      return compareInstances(
+        instance1[key] as Class<unknown>,
+        instance2[key] as Class<unknown>,
+      );
+    }
+
     if (instance1[key] !== instance2[key]) {
       return false;
     }
