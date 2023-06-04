@@ -58,6 +58,14 @@ describe('Should make the following assertions', () => {
     expect([1, 2, 3]).not.toHaveLength(2);
   });
 
+  it('When is less than a specific value', () => {
+    expect(1).toBeLessThan(2);
+  });
+
+  it('When is not less than a specific value', () => {
+    expect(2).not.toBeLessThan(1);
+  });
+
   it('When contains a specific value', () => {
     expect([1, 2, 3]).toContain(2);
   });

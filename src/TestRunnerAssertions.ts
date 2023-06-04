@@ -28,6 +28,9 @@ export const expect = (value: any) => ({
   toHaveLength: (length: number) => {
     assert.strictEqual(value.length, length);
   },
+  toBeLessThan: (expected: number) => {
+    assert.ok(value < expected);
+  },
   toContain: (expected: unknown) => {
     assert.ok(value.includes(expected));
   },
@@ -55,6 +58,9 @@ export const expect = (value: any) => ({
     },
     toHaveLength: (length: number) => {
       assert.notStrictEqual(value.length, length);
+    },
+    toBeLessThan: (expected: number) => {
+      assert.ok(value >= expected);
     },
     toContain: (expected: unknown) => {
       assert.ok(!value.includes(expected));
