@@ -1,5 +1,20 @@
 import * as assert from 'assert';
 
+import { Class } from '../Utils/Class';
+
+const isPlainObject = (value: unknown): boolean => {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    value.constructor === Object &&
+    Object.prototype.toString.call(value) === '[object Object]'
+  );
+};
+
+const isClass = (value: unknown): boolean => {
+  return (value as Class<unknown>).constructor.toString().startsWith('class');
+};
+
 const isEqualObjects = (
   obj1: Record<string, unknown>,
   obj2: Record<string, unknown>,
@@ -36,12 +51,60 @@ const expectObjectInArray = (
   );
 };
 
+const compareInstances = (
+  instance1: Class<unknown>,
+  instance2: Class<unknown>,
+): boolean => {
+  const isSameClass = instance1.constructor.name === instance2.constructor.name;
+
+  if (!isSameClass) {
+    return false;
+  }
+
+  const keys1 = Object.keys(instance1);
+  const keys2 = Object.keys(instance2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (instance1[key] !== instance2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const expectInstanceInArray = (
+  received: Class<unknown>[],
+  expected: Class<unknown>,
+  isNot = false,
+): asserts received => {
+  assert.ok(
+    isNot
+      ? !received.some(element => compareInstances(element, expected))
+      : received.some(element => compareInstances(element, expected)),
+  );
+};
+
 export const toContainEqual = (
   received: unknown[],
   expected: unknown,
   isNot = false,
 ): void => {
-  if (typeof expected === 'object') {
+  if (isClass(expected)) {
+    return expectInstanceInArray(
+      received as Class<unknown>[],
+      expected as Class<unknown>,
+      isNot,
+    );
+  }
+
+  if (isPlainObject(expected)) {
     return expectObjectInArray(
       received as Record<string, unknown>[],
       expected as Record<string, unknown>,
