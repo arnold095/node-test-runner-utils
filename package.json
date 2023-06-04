@@ -6,7 +6,7 @@
   "types": "./dist/types/index.d.ts",
   "scripts": {
     "test": "node --require @swc/register tests/node-test-runner.config.js",
-    "build": "tsc"
+    "build": "rm -rf dist && tsc"
   },
   "repository": {
     "type": "git",
