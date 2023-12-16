@@ -1,3 +1,4 @@
+import { finished } from 'node:stream';
 import { run } from 'node:test';
 import { dot as Dot, spec as Spec, tap as Tap } from 'node:test/reporters';
 
@@ -9,6 +10,11 @@ type TestLoaderOptions = {
   concurrency?: boolean;
   timeout?: number;
   reporter?: 'dot' | 'spec' | 'tap';
+  teardownFile?: string;
+};
+
+type TeardownFile = {
+  teardown: () => Promise<void>;
 };
 
 const verifyTestPath = (testPath: string): void => {
@@ -31,19 +37,43 @@ const getReporter = (reporterName: TestLoaderOptions['reporter']): unknown => {
   return reporter;
 };
 
+const execTeardown = async (teardownFile: string): Promise<void> => {
+  const { teardown } = (await import(teardownFile)) as TeardownFile;
+
+  await teardown();
+};
+
 export const runTests = (options: TestLoaderOptions): void => {
   const { testPath, reporter, ...anotherOptions } = options;
 
   verifyTestPath(testPath);
 
   const files = sync([testPath]);
+  const teardownFile = options.teardownFile ? sync(options.teardownFile)[0] : undefined;
 
-  run({
+  const composedReporter = getReporter(reporter) as NodeJS.ReadableStream;
+
+  const runnerStream = run({
     ...anotherOptions,
     files,
-  })
-    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-    // @ts-ignore
-    .compose(getReporter(reporter))
-    .pipe(process.stdout);
+  }).compose(composedReporter);
+
+  finished(runnerStream, () => {
+    if (teardownFile) {
+      execTeardown(teardownFile)
+        .then(() => {
+          return Promise.resolve();
+        })
+        .catch(err => {
+          console.error(
+            `[TestLoader] An error has occurred in the teardown function ${
+              (err as Error).message
+            }`,
+          );
+          throw err;
+        });
+    }
+  });
+
+  runnerStream.pipe(process.stdout);
 };

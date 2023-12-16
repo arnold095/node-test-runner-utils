@@ -16,7 +16,7 @@ const replaceDynamicValues = (
   });
 };
 
-export const describe = (description: string, tests: () => void): void => {
+export const describe = (description: string, tests: () => void): Promise<void> => {
   return describeNode(description, tests);
 };
 
@@ -25,7 +25,7 @@ describe.each =
   (description: string, test: (scenario: T) => void | Promise<void>): void => {
     for (const scenario of scenarios) {
       const scenarioDescription = replaceDynamicValues(scenario, description);
-      describeNode(scenarioDescription, () => test(scenario));
+      void describeNode(scenarioDescription, () => test(scenario));
     }
   };
 
@@ -34,7 +34,7 @@ describe.skip = describeNode.skip;
 export const it = (
   description: string,
   test: (args?: any) => void | Promise<void>,
-): void => {
+): Promise<void> => {
   return itNode(description, test);
 };
 
@@ -43,7 +43,7 @@ it.each =
   (description: string, test: (scenario: T) => void | Promise<void>): void => {
     for (const scenario of scenarios) {
       const scenarioDescription = replaceDynamicValues(scenario, description);
-      itNode(scenarioDescription, () => test(scenario));
+      void itNode(scenarioDescription, () => test(scenario));
     }
   };
 
