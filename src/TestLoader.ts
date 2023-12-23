@@ -11,6 +11,7 @@ type TestLoaderOptions = {
   timeout?: number;
   reporter?: 'dot' | 'spec' | 'tap';
   teardownFile?: string;
+  setup?: () => void | Promise<void>;
 };
 
 type TeardownFile = {

@@ -16,8 +16,8 @@ const replaceDynamicValues = (
   });
 };
 
-export const describe = (description: string, tests: () => void): Promise<void> => {
-  return describeNode(description, tests);
+export const describe = (description: string, tests: () => void): void => {
+  return void describeNode(description, tests);
 };
 
 describe.each =
@@ -34,8 +34,8 @@ describe.skip = describeNode.skip;
 export const it = (
   description: string,
   test: (args?: any) => void | Promise<void>,
-): Promise<void> => {
-  return itNode(description, test);
+): void => {
+  return void itNode(description, test);
 };
 
 it.each =
